@@ -7,7 +7,7 @@ function StartGameScreen(){
                 <TextInput 
                     style={styles.numberInput} maxLength={2} 
                     keyboardType={'number-pad'}
-                    autoCapitalize='none' autoCorrect='none'/>
+                    autoCapitalize='none'/>
                 <PrimaryButton>Reset</PrimaryButton>
                 <PrimaryButton>Confirm</PrimaryButton>
             </View>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         marginTop: 100,
         marginHorizontal: 24,
         borderRadius: 12,
-        backgroundColor: '#72063c',
+        backgroundColor: '#4e0329',
 
         //shadow for android
         elevation: 10, 
