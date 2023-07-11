@@ -6,7 +6,7 @@ function StartGameScreen(){
     return  <View style={styles.inputContainer}>
                 <TextInput 
                     style={styles.numberInput} maxLength={2} 
-                    keyboardType={'number-pad'}
+                    keyboardType={'number-pad'} numberOfLines={1}
                     />
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
