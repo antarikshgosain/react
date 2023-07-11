@@ -2,7 +2,7 @@ import { StyleSheet, TextInput , View } from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 
 function StartGameScreen(){
-    return  
+    return  (
     <View style={styles.inputContainer}>
         <TextInput 
             style={styles.numberInput} maxLength={2} 
@@ -17,6 +17,7 @@ function StartGameScreen(){
             </View>
         </View>
     </View>
+    )
 }
 
 export default StartGameScreen;
