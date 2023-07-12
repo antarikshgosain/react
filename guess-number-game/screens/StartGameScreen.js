@@ -1,19 +1,50 @@
-import { StyleSheet, TextInput , View } from 'react-native';
+import { StyleSheet, TextInput, View, Alert } from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
+import { useState } from 'react';
 
 function StartGameScreen(){
+
+    const num = 7 ;
+    const [enteredNumber, setEnteredNumber] = useState('');
+
+    function numberInputHandler(num) {
+        console.log('New entered value is: ' + num);
+        setEnteredNumber(num);
+    }
+
+    function resetInputHadler(){
+        setEnteredNumber('');
+    }
+
+    function confirmInputHandler(){
+        const chosenNumber = parseInt(enteredNumber);
+        console.log('trying to confirm: '+ chosenNumber);
+        if(isNaN(chosenNumber) || chosenNumber<=0 || chosenNumber>=100){
+            
+            console.error("Invalid Number "+ chosenNumber);
+
+            Alert.alert('Invalid number!', 'Number has to be between 1 and 99',
+            [{text:'Got it', style: 'default'}, {text:'Okay', style: 'destructive', onPress: resetInputHadler}]);
+            
+        } 
+
+        console.log('Valid Number');
+    }
+
     return  (
     <View style={styles.inputContainer}>
         <TextInput 
-            style={styles.numberInput} maxLength={2} 
+            style={styles.numberInput} maxLength={3} 
             keyboardType={'number-pad'} numberOfLines={1}
+            value={enteredNumber}       
+            onChangeText={numberInputHandler}
         />
         <View style={styles.buttonsContainer}>
             <View style={styles.buttonContainer}>
-                <PrimaryButton>Reset</PrimaryButton>
+                <PrimaryButton onPress={resetInputHadler}>Reset</PrimaryButton>
             </View>
             <View style={styles.buttonContainer}>
-                <PrimaryButton>Confirm</PrimaryButton>
+                <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
             </View>
         </View>
     </View>
@@ -38,8 +69,7 @@ const styles = StyleSheet.create({
         //shadow for iOS
         shadowColor: 'black',
         shadowOffset: {width: 0, height: 2},
-        shadowRadius: 6,
-        shadowOpacity: 0.5,
+        shadowRadius: 6,        shadowOpacity: 0.5,
 
     },
     numberInput: {
