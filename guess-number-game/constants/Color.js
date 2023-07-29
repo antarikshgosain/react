@@ -5,6 +5,7 @@ const Colors = {
     yellow400:  '#ddb52f',
     gradient1:  '#ddb52f',
     gradient2:  '#4e0329',
+    white:      '#ffffff',
 }
 
 export default Colors;
