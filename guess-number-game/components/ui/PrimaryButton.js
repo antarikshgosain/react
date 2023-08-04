@@ -2,12 +2,12 @@ import { setStatusBarTranslucent } from 'expo-status-bar';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import Colors from '../../constants/Color';
 
-function PrimaryButton({children, onPress}) {
-    
+function PrimaryButton({children, onPress, colorProp}) {
+    console.log('Color prop: '+{colorProp})
     return (
-        <View style={styles.buttonOuterContainer}>
+        <View style={[styles.buttonOuterContainer, colorProp]}>
             <Pressable onPress={onPress} android_ripple={{color: Colors.primary600}}
-                style={({pressed}) => pressed ? [styles.buttonInnerContainer, styles.iosPressed] : [styles.buttonInnerContainer] }>
+                style={({pressed}) => pressed ? [styles.buttonInnerContainer, styles.iosPressed, colorProp] : [styles.buttonInnerContainer, colorProp] }>
                 <Text style={styles.buttonText}>{children}</Text>
             </Pressable>
          </View>
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
     buttonInnerContainer: {
         backgroundColor: Colors.primary500,
-        paddingVertical: 8,
+        paddingVertical: 12,
         paddingHorizontal: 16,
         elevation: 4
     },

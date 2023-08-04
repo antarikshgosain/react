@@ -4,5 +4,17 @@
   "dev": true,
   "minify": false,
   "urlRandomness": null,
-  "https": false
+  "https": false,
+  "vscode-color-picker.languages": [
+    "php",
+    "html",
+    "css",
+    "python",
+    "jsonc",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+    ]
 }
