@@ -6,6 +6,7 @@ import Title from '../components/ui/Title';
 import Card from '../components/ui/Card';
 import InstructionText from '../components/ui/InstructionText';
 import Colors from '../constants/Color';
+import { Ionicons } from '@expo/vector-icons';
 
 function generateRandomNumberBetween(min, max, exclude) {
     const result = Math.floor(Math.random() * (max-min)) + min ;
@@ -59,10 +60,14 @@ function GameScreen({userNumber, onGameOver}) {
                 <InstructionText styleProp={styles.instructionTextProp}>Lower or Higher?</InstructionText>
                 <View style={styles.buttonsContainer}>
                     <View style={styles.buttonContainer}>
-                        <PrimaryButton colorProp={styles.redButtonProp} onPress={nextGuessHandler.bind(this, 'lower')}> - </PrimaryButton>
+                        <PrimaryButton colorProp={styles.redButtonProp} onPress={nextGuessHandler.bind(this, 'lower')}>
+                            <Ionicons name='md-remove-circle' size={24} color={'orange'}/>
+                        </PrimaryButton>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <PrimaryButton colorProp={styles.greenButtonProp} onPress={nextGuessHandler.bind(this, 'higher')}> + </PrimaryButton>
+                        <PrimaryButton colorProp={styles.greenButtonProp} onPress={nextGuessHandler.bind(this, 'higher')}>
+                            <Ionicons name='md-add-circle' size={24} color={'lime'}/>
+                        </PrimaryButton>
                     </View>
                 </View>
             </Card>
