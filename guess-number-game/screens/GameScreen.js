@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
 import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Title from '../components/ui/Title';
@@ -7,6 +7,7 @@ import Card from '../components/ui/Card';
 import InstructionText from '../components/ui/InstructionText';
 import Colors from '../constants/Color';
 import { Ionicons } from '@expo/vector-icons';
+import GuessLogItem from '../components/game/GuessLogItem';
 
 function generateRandomNumberBetween(min, max, exclude) {
     const result = Math.floor(Math.random() * (max-min)) + min ;
@@ -25,12 +26,18 @@ function GameScreen({userNumber, onGameOver}) {
 
     const initialGuess = generateRandomNumberBetween(1, 100, userNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+    const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
     useEffect(() => {
         if(currentGuess === userNumber) {
-            onGameOver();
+            onGameOver(guessRounds.length);
         }
     }, [currentGuess, userNumber, onGameOver]); //if any of these state changes, this effect will take place and check for gameOver
+
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []); //this empty useEffect will only execute 1st time when GameScreen component is loaded
 
     function nextGuessHandler(direction) { // direction = 'lower' or 'higher'
 
@@ -48,8 +55,11 @@ function GameScreen({userNumber, onGameOver}) {
         }
         const newRandomNumber = generateRandomNumberBetween(minBoundary, maxBoundary, currentGuess);
         setCurrentGuess(newRandomNumber);
+        setGuessRounds(prevGuessRound => [newRandomNumber, ...prevGuessRound]);
         console.log('min: '+ minBoundary + ' max: '+ maxBoundary);
     }
+
+    const guessRoundsListLength = guessRounds.length;
 
     return (
         
@@ -71,7 +81,14 @@ function GameScreen({userNumber, onGameOver}) {
                     </View>
                 </View>
             </Card>
-            <Text>LOG ROUNDS</Text>
+            <InstructionText>Guesses:</InstructionText>
+            <View style={styles.listContainer}>
+                {/* {guessRounds.map(guessRound => <InstructionText key={{guessRound}}>{guessRound}</InstructionText>)} */}
+                <FlatList data = {guessRounds} 
+                renderItem = {(itemData) => <GuessLogItem roundNumber={guessRoundsListLength - itemData.index} guess={itemData.item}></GuessLogItem>} 
+                keyExtractor = {(item) => item}
+                />
+            </View>
         </View>
     
     );
@@ -100,6 +117,10 @@ const styles = StyleSheet.create({
     },
     redButtonProp: {
         backgroundColor: Colors.red400,
+    },
+    listContainer:{
+        flex: 1,
+        padding: 16,
     }
 
 });
