@@ -1,6 +1,6 @@
 import { setStatusBarTranslucent } from 'expo-status-bar';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
-import Colors from '../../constants/Color';
+import Colors from '../../constants/Color.android';
 
 function PrimaryButton({children, onPress, colorProp}) {
     //console.log('Color prop: '+{colorProp})

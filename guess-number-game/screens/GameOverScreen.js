@@ -1,15 +1,36 @@
-import { View, Text, Pressable, StyleSheet, Image, Dimensions } from 'react-native';
-import Colors from '../constants/Color';
+import { View, Text, Pressable, StyleSheet, Image, useWindowDimensions, ScrollView } from 'react-native';
+import Colors from '../constants/Color.android';
 import Title from '../components/ui/Title';
 import Card from '../components/ui/Card';
 import InstructionText from '../components/ui/InstructionText';
 import PrimaryButton from '../components/ui/PrimaryButton';
 
 function GameOverScreen({roundsNumber, userNumber, onStartNewGame}) {
+
+    const {width, height} = useWindowDimensions();
+    let imageSize = 300;
+    let paddingFromTop = 100;
+
+    if (width < 400) {
+        imageSize = 150;
+    }
+
+    if (height < 500) {
+        imageSize = 100;
+        paddingFromTop = 30;
+    }
+
+    const imageStyle = {
+        width: imageSize ,
+        height: imageSize ,
+        borderRadius: imageSize/2 ,
+    }
+
     return (
-        <View style={styles.rootContainer}>
+        <ScrollView>
+        <View style={[styles.rootContainer, {paddingTop: paddingFromTop} ]}>
             <Title>Game Over</Title>
-            <View style={styles.imageContainer}>
+            <View style={[styles.imageContainer, imageStyle]}>
                 <Image style={styles.image} source={require('../assets/images/success.png')}></Image>
             </View>
             <View>
@@ -26,16 +47,11 @@ function GameOverScreen({roundsNumber, userNumber, onStartNewGame}) {
                 </PrimaryButton>
             </View>
         </View>
+        </ScrollView>
     )
 }
 
 export default GameOverScreen;
-
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
-
-console.log('Device Height: ' + deviceHeight);
-console.log('Device Width: ' + deviceWidth);
 
 const styles = StyleSheet.create({
     rootContainer: {
@@ -43,12 +59,13 @@ const styles = StyleSheet.create({
         paddingTop: 100,
         justifyContent: 'center',
         alignContent:'center',
+        alignItems: 'center'
 
     },
     imageContainer: {
-        width: 300,
-        height: 300,
-        borderRadius: 150,
+        // width: 300,
+        // height: 300,
+        // borderRadius: 150,
         borderWidth: 4,
         borderColor: Colors.primary800,
         overflow: 'hidden',
@@ -69,6 +86,11 @@ const styles = StyleSheet.create({
     newGameButtonContainer: {
         marginHorizontal: 60,
         paddingVertical: 20
+    },
+    debugRed: {
+        borderColor: 'red',
+        borderWidth: 1,
+        
     }
 
 });

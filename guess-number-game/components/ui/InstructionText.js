@@ -1,5 +1,5 @@
 import {Text, StyleSheet} from 'react-native';
-import Colors from '../../constants/Color'
+import Colors from '../../constants/Color.android'
 
 function InstructionText({children, styleProp}) {
     return <Text style={[styles.instructionYellow, styleProp]}>{children}</Text> 
