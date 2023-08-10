@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Image } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Image, Dimensions } from 'react-native';
 import Colors from '../constants/Color';
 import Title from '../components/ui/Title';
 import Card from '../components/ui/Card';
@@ -30,6 +30,12 @@ function GameOverScreen({roundsNumber, userNumber, onStartNewGame}) {
 }
 
 export default GameOverScreen;
+
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
+console.log('Device Height: ' + deviceHeight);
+console.log('Device Width: ' + deviceWidth);
 
 const styles = StyleSheet.create({
     rootContainer: {
